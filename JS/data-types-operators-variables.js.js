@@ -1,7 +1,7 @@
  //1.For each of the following code blocks, read the code and predict what the result of evaluating it would be, then execute the statement(s) in the Chrome console.
- // var a = 1
- // var b = a++
- // var c = ++a
+ // let a = 1
+ // let b = a++
+ // let c = ++a
  //
  // console.log(a)
  // console.log(b)
@@ -12,8 +12,8 @@
  // a=3
 
 
- // var d ='hello'
- // var e = false
+ // let d ='hello'
+ // let e = false
  //
  // d++
  // e++
@@ -21,19 +21,19 @@
  // console.log(e) 1
 
 
- // var perplexed;
+ // let perplexed;
  // perplexed + 2;
  //
- // console.log(perplexed)undefined
+ // console.log(perplexed +2)NaN
 
- // var price = 2.7;
+ // let price = 2.7;
  // price.toFixed(2);
- // console.log(price)//2.7
+ // console.log(price)2.70
  //
  //
- // var price = "2.7";
+ // let price = "2.7";
  // price.toFixed(2);
- // console.log(price)
+ // console.log(price)runtime error
 
  // isNaN(0) false
  //
