@@ -103,25 +103,18 @@ let calculateTotal = (num, total) => {
     switch(num){
         case 0:
             return alert(`Your lucky no. was ${num}. no discount, your total is: ${total}`);
-        break
         case 1:
-            return alert(`Your lucky no. was ${num}. 10% discount. Total: ${total/.1}`);
-        break
+            return alert(`Your lucky no. was ${num}. 10% discount. Total: ${total*.1}`);
         case 2:
-            return `Your lucky no. was ${num}. 25% discount. Total: ${total/.25}`;
-            break
+            return alert(`Your lucky no. was ${num}. 25% discount. Total: ${total*.25}`);
         case 3:
-            return `Your lucky no. was ${num}. 35% discount. Total: ${total/.35}`;
-            break
+            return alert(`Your lucky no. was ${num}. 35% discount. Total: ${total*.35}`);
         case 4:
-            return `Your lucky no. was ${num}. 50% discount. Total: ${total/.5}`;
-            break;
+            return alert(`Your lucky no. was ${num}. 50% discount. Total: ${total*.5}`);
         case 5:
-            return `Your lucky no. was ${num}. everything free. ${total * 0}`;
-            break;
+            return alert(`Your lucky no. was ${num}. everything free. ${total * 0}`);
         default:
-            return `your total is : ${total}`
-        break;
+            return alert(`your total is : ${total}`);
     }
 }
 /**
@@ -163,7 +156,7 @@ function question(){
     let confirmation = confirm(`Would you like to enter a number`)
 
     if(confirmation == true){
-        let number = prompt('Enter your number: ')
+        let number = parseFloat(prompt('Enter your number: '))
 
         if(typeof number == 'number'){
             number % 2 == 0 ? alert(`Num is even`) : alert('num is odd')
