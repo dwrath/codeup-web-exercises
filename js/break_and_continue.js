@@ -8,7 +8,7 @@ const loop = () => {
 
     for(let i = 1; i < 50; i+=2){
 
-         if(num == i){
+         if(num === i){
             console.log(`skipping:${num}`)
             continue
         }
