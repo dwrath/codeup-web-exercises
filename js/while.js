@@ -7,6 +7,19 @@ let i = 2
     }
 
 }
+// let coneInventory = randomNumber(50,100);
+// do{
+//     let conesWanted = randomNumber(1,5);
+//     if(conesWanted > coneInventory){
+//         console.log(`Cannot sell you ${conesWanted}, i only have ${coneInventory}`);
+//     }else{
+//         console.log(`${conesWanted} sold...`);
+//         coneInventory -= conesWanted;
+//     }
+//     console.log(`${coneInventory} left`);
+//
+// }while(coneInventory > 0);
+// console.log("yay! all cones sold!");
 
 const seller = () => {
     let allCones = (Math.random() * (100 - 50) + 50).toFixed();
