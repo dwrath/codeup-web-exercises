@@ -26,9 +26,15 @@
     planetsArray.forEach(planet => {
         console.log(`<br>${planet}</br>`)
     })
+    // let breakPlanets = planetsArray.join(`<br>`)
 
+    let list = []
     planetsArray.forEach(planet => {
-        console.log(`<li>${planet}</li>`)
+         let element = `<li>${planet}</li>`
+        list.push(element)
     })
+        console.log(`<ul>${list.join('\n')}</ul>`)
+
+    let ul = `<ul><li>${planetsArray.join('<li></lil>')}</li></ul>`
 
 })();
