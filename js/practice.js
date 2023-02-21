@@ -97,21 +97,50 @@ const canGetRideshare = () => {
     return result
 }
 
-const getToDestination = (age, isInsured, hasCar) => {
-    let result = '';
-   if(age > 16 && isInsured == true && hasCar == true){
-         result='Use your car';
-    }else if(age < 16 && isInsured == false || hasCar==false && canGetRideshare == true){
-       let rideshare = canGetRideshare()
-        if(rideshare == true){
-            return 'you can get rideshare'
+// const getToDestination = (age, isInsured, hasCar) => {
+//     let result = '';
+//    if(age > 16 && isInsured == true && hasCar == true){
+//          result='Use your car';
+//     }else if(age < 16 && isInsured == false || hasCar==false && canGetRideshare == true){
+//        let rideshare = canGetRideshare()
+//         if(rideshare == true){
+//             return 'you can get rideshare'
+//         }else{
+//             return 'you cannot get rideshare'
+//         }
+//
+//     }else {
+//         result = 'call a friend';
+//     }
+//     console.log(result);
+//
+// }
+
+function make_squares(arr) {
+    const n = arr.length;
+    const squares = Array(n).fill(0);
+    // TODO: Write your code here
+    let highestSquaredIdx = n-1
+    let left = 0
+    let right = n -1
+
+    while(left <= right){
+        let leftSquare = arr[left] * arr[left],
+            rightSquare = arr[right]* arr[right]
+
+        if(leftSquare > rightSquare){
+            squares[highestSquaredIdx] = leftSquare
+            left +=1
         }else{
-            return 'you cannot get rideshare'
+            squares[highestSquaredIdx] = rightSquare
+            right -=1
         }
-
-    }else {
-        result = 'call a friend';
+        highestSquaredIdx -= 1
     }
-    console.log(result);
-
+    return squares;
 }
+
+
+console.log(`Squares: ${make_squares([-2, -1, 0, 2, 3])}`);
+console.log(`Squares: ${make_squares([-3, -1, 0, 1, 2])}`);
+
