@@ -11,7 +11,13 @@
      *  > console.log(person.firstName) // "Rick"
      *  > console.log(person.lastName) // "Sanchez"
      */
-        let person = {firstName: 'Damian', lastName: 'Wrather'}
+        let person = {
+            firstName: 'Damian',
+            lastName: 'Wrather',
+            sayHello: function (){
+                return `Hello from ${person.firstName}${person.lastName}`
+        }
+    }
 
     /**
      * TODO:
@@ -22,9 +28,7 @@
      * Example
      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
      */
-     person.sayHello = () => {
-        return `Hello from ${person.firstName}${person.lastName}`
-    }
+     console.log(person.sayHello)
 
 
     /** TODO:
