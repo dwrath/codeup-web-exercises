@@ -144,3 +144,30 @@ function make_squares(arr) {
 console.log(`Squares: ${make_squares([-2, -1, 0, 2, 3])}`);
 console.log(`Squares: ${make_squares([-3, -1, 0, 1, 2])}`);
 
+//Given an integer array nums, return true if any value appears at least twice in the array,
+// and return false if every element is distinct.
+
+function containsDuplicate(nums) {
+    // TODO: Write your code here
+    let set = new Set()
+
+    for(let i=0; i < nums.length; i++){
+        if(set.has(nums[i])){
+            return true
+        }
+        set.add(nums[i])
+    }
+    return false;
+}
+
+const nums1 = [1, 2, 3, 4];
+console.log(containsDuplicate(nums1)); // Expected output: false
+
+const nums2 = [1, 2, 3, 1];
+console.log(containsDuplicate(nums2)); // Expected output: true
+
+const nums3 = [];
+console.log(containsDuplicate(nums3)); // Expected output: false
+
+const nums4 = [1, 1, 1, 1];
+console.log(containsDuplicate(nums4)); // Expected output: true
