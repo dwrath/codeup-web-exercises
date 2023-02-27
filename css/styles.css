@@ -1,4 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+img{
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
 .fancy-header{
-    color: purple;
+    color: blue;
     text-decoration: underline;
+    text-align: center;
+}
+h1{
+    font-size: 55px;
+}
+h1, h2{
+    color: red;
+    text-decoration: underline;
+    font-weight: 700;
+}
+p{
+    text-align: center;
+    color: #e2e2e2;
+}
+
+body{
+    background-color: lightgray;
+    background-image: url("/images/businessman-g256e52125_1920.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0px;
+    padding: 20px;
+    font-family: Roboto Thin;
+}
+
+
+ul{
+    list-style-type: circle;
+}
+
+ul li, ol li{
+    color: lightgray;
+}
+.lists-wrapper{
+    display: flex;
+}
+.list{
+    flex: 1 0;
+}
+
+.photos-wrapper{
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.photos-wrapper .photo-wrapper {
+    flex: 1 0;
+    max-width: 400px;
+}
+.photos-wrapper .photo-wrapper img{
+    flex: 1 0;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}
+.products{
+    text-align: center;
+}
+.product-table{
+    min-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: Roboto;
+    box-shadow: darkgray;
+    color: whitesmoke;
+}
+.product-table thead tr{
+    background-color: red;
+    color: whitesmoke;
+    text-align: center;
+}
+.product th, .product-table td{
+    padding: 12px 15px;
+}
+.product-table tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+
+.top a{
+    transition: all .2s ;
+    color: whitesmoke;
+    margin-left: 30px;
+}
+.top:hover{
+    transform: scale(1.05);
+}
+.emphasis{
+    color: whitesmoke;
+}
+
+.vision{
+    text-align: center;
 }
