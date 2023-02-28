@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+html, body {
+    height: 100%;
+}
+input, button, textarea, select {
+    font: inherit;
+}
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+}
+
+.page-wrapper.all-centered {
+    justify-content: center;
+    align-items: center;
+}
