@@ -46,6 +46,8 @@ ul li, ol li{
 }
 .lists-wrapper{
     display: flex;
+    border-bottom: solid whitesmoke;
+    border-top: solid whitesmoke;
 }
 .list{
     flex: 1 0;
