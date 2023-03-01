@@ -5,9 +5,82 @@
     <link rel="stylesheet" href="css/resets.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/layout-elements-exercise.css">
-    <title>Title</title>
+    <title>Layouts</title>
 </head>
 <body>
+  <div class="page-wrapper">
+    <header class="container justify-center">
+      <div class="row justify-space-between align-center">
+        <div class="column shrink">
+          <img src="images/example-logo.svg" alt="logo">
+        </div>
+          <div class="column">
+              <nav class="row justify-right">
+                  <div class="column shrink"><a href="#" title="Go Home">Home</a></div>
+                  <div class="column shrink"><a href="#" title="About">Overview</a></div>
+                  <div class="column shrink"><a href="#" title="Our Team">Features</a></div>
+              </nav>
+          </div>
+          <div class="column shrink">
+              <div class="row justify-right">
+                  <button class="sign-up">Sign up</button>
+              </div>
+          </div>
+      </div>
+    </header>
+      <section class="container justify-center hero-scene">
+            <div class="row">
+                <div class="column justify-top">
+                    <p>An exercise in Web Layouts</p>
+                    <p class="bold-hero-text">We are all masters of the frontend.</p>
+                    <p>Home is behind, the world ahead and there are<br>
+                        many paths to tread through shadows to the.</p>
+                </div>
+                <div class="column">
+                    <div class="grey-box"></div>
+                </div>
+            </div>
+      </section>
+      <section class="container features">
+          <div class="row">
+              <div class="column justify-center text-center ">
+                  <h2 class="features-title">Features</h2>
+                  <p class="features-text features-text-weight">Home is behind, the world ahead and there are many paths to tread<br>
+                      through shadows to the edge, world ahead and there are.</p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="column align-center text-center feature-card">
+                <img class="icons" src="images/picture.png" alt="photo icon">
+                  <p class="features-sub-title">Feature Title</p>
+                  <p class="features-text features-text-weight">
+                      Where the Shadows lie. One Ring to<br>rule them all, One Ring to find them<br>
+                      One Ring to bring them all
+                  </p>
+              </div>
+              <div class="column align-center text-center feature-card">
+                  <img class="icons" src="images/picture.png" alt="photo icon">
+                  <p class="features-sub-title">Feature Title</p>
+                  <p class="features-text features-text-weight">Nine for Mortal Men, doomed to die,<br>
+                  One for the Dark Lord on his dark<br>
+                  throne in the Land of Mordor</p>
+              </div>
+              <div class="column align-center text-center feature-card">
+                  <img class="icons" src="images/picture.png" alt="photo icon">
+                  <p class="features-sub-title">Feature Title</p>
+                  <p class="features-text features-text-weight">Three Rings for the Eleven-kings under<br>
+                  the sky, Seven for the Dwarf-lords in<br> halls of stone</p>
+              </div>
+              <div class="column align-center text-center feature-card">
+                  <img class="icons" src="images/picture.png" alt="photo icon">
+                  <p class="features-sub-title">Feature Title</p>
+                  <p class="features-text features-text-weight">Its a dangerous business, Frodo,<br>
+                      going out your door. You step onto<br>
+                      the road.</p>
+              </div>
+          </div>
+      </section>
+  </div>
 
 </body>
 </html>

@@ -29,9 +29,7 @@
 .container.justify-center {
     justify-content: center;
 }
-.container.justify-center {
 
-}
 
     /*
         The "row" is a container element that horizontally separates its
@@ -101,4 +99,7 @@
 }
 .column.justify-space-between {
     justify-content: space-between;
+}
+column.justify-top{
+    align-items: start;
 }
