@@ -171,3 +171,47 @@ console.log(containsDuplicate(nums3)); // Expected output: false
 
 const nums4 = [1, 1, 1, 1];
 console.log(containsDuplicate(nums4)); // Expected output: true
+
+/**
+ * Convert Address to Object
+ * Write a function named convertAddressToObject that accepts a string that contains
+ * a street number (as a string) and
+ * street name separated by a space characters,
+ * and returns an object with properties streetNumber and streetName.
+ *
+ * Examples
+ *
+ * >> convertAddressToObject('8646 Sunny Oaks') ➞ {streetNumber: '8646', streetName: 'Sunny Oaks'}
+ * >> convertAddressToObject('5408 Villa Nueva') ➞ {streetNumber: '5408', streetName: 'Villa Nueva'}
+ **/
+const convertAddressToObject = (address) => {
+    const indexOfSpace = address.indexOf(' ')
+    let streetNum = address.substring(0, indexOfSpace)
+    let streetName = address.substring(indexOfSpace+1, address.length-1)
+
+    let addressObj = {streetNumber: streetNum, streetName: streetName }
+
+    return addressObj;
+}
+console.log(convertAddressToObject('8646 Sunny Oaks'));
+
+/**
+ * Find the Smallest and Biggest Numbers
+ * Create a function named minMax that takes an array of numbers and return both the minimum and maximum numbers, in that order.
+ *
+ * Examples
+ * >> minMax([1, 2, 3, 4, 5]) ➞ [1, 5]
+ * >> minMax([2334454, 5]) ➞ [5, 2334454]
+ * >> minMax([1]) ➞ [1, 1]
+ *
+ * Notes
+ * All test arrays will have at least one element and are valid.
+ */
+
+const minMax = (arr) => {
+    const max = Math.max(...arr)
+    const min = Math.min(...arr)
+
+    return [max, min]
+}
+console.log(minMax([1, 2, 3, 4, 5]))
