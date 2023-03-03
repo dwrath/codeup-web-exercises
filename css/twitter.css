@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    font-family: Roboto;
+}
+.logo{
+    width: 30px;
+}
+
+.icon{
+    width: 35px;
+    display: flex;
+    column-gap: 20px;
+}
+.home .explore .notifications .messages{
+    font-size: 20px;
+}
+
+.left-sidebar, .right-sidebar{
+    flex: 0 1 250px;
+}
+
+.menu-row{
+   margin: 10px 0px;
+}
+.tweet-btn{
+    border: none;
+    border-radius: 31px;
+    padding: 8px 75px;
+    background-color: #1C9BEF;
+    color: #ffffff;
+}
+
+.banner{
+    max-height: 40vh;
+    width: 100%;
+    margin-bottom: -50px;
+
+}
+.outlines-left-menu{
+    border: 1px none #b6b6b6;
+    border-right-style: solid;
+}
+.outlines-middle{
+    border: 1px none #b6b6b6;
+    border-right-style: solid;
+}
+.tweet-number{
+    font-size: 10px;
+    margin-left: 75px;
+    color: #7e7e7e;
+}
+.profile-pic {
+    max-width: 150px;
+    margin-left: 10px;
+}
+.edit-btn{
+    border-radius: 25px;
+    padding: 8px 30px;
+    background-color: white;
+}
+.twitter-handle{
+    color: #7e7e7e;
+    margin-bottom: 15px;
+}
+.svg-location{
+    width: 15px;
+}
+.bio{
+    margin-bottom: 10px;;
+}
+.city{
+    font-size: 15px;
+}
+.calender{
+    width: 17px;
+}
+.date-joined{
+    font-size: 15px;
+}
+.follower-spacing{
+    margin: 10px 0px;
+}
+.back-button{
+    width: 30px;
+}
+.tweet-navigation{
+    margin: 30px 0px;
+}
+.border{
+    border-bottom: 1px solid black;
+}
+.menu-box{
+    background-color: #fcfcfc;
+}
+.menu-box:hover{
+    background-color: #1C9BEF;
+    transition: all ease .3s;
+}
+.search-wrapper{
+    position: relative;
+    display: flex;
+    min-width: 100px;
+}
+.search{
+    border-radius: 40px;
+    border: unset;
+    height: 30px;
+    width: 220px;
+    margin: 10px;
+    padding: 2px 23px 2px 30px;
+    background-color: #e5e5e5;
+
+}
+.search-icon{
+    position: absolute;
+    top: 39px;
+    left: 37px;
+    width: 14px
+}
+.search-bar{
+    margin-top: 20px;
+}
+.image-grid{
+    width: 150px;
+    height: 100px;
+
+}
+.photo-grid{
+    gap: 3px;
+    margin-bottom: 3px;
+}
+
+.grid{
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-left: 20px;
+}
+.row:last-child {
+    margin-top: auto;
+}
+
+.bottom-profile-row{
+    width: 25px;
+}
+.bottom-edit-btn{
+    border-radius: 50px;
+    padding: 5px 10px;
+    background-color: unset;
+}
+.name-size{
+font-size: 15px;
+    white-space: nowrap;
+}
+.handle-size{
+    white-space: nowrap;
+    font-size: 13px;
+}
