@@ -69,8 +69,14 @@
 .row.justify-right{
     justify-content: end;
 }
+.row.justify-left{
+    justify-content: start;
+}
 .row.grow{
     flex: 1 0 0;
+}
+.row.align-bottom{
+    align-items: end;
 }
 
     /*
@@ -94,6 +100,9 @@
 .column.align-right{
     align-items: end;
 }
+.column.align-left{
+    align-items: start;
+}
 .column.text-center{
     text-align: center;
 }
@@ -105,4 +114,7 @@
 }
 column.justify-top{
     align-items: start;
+}
+.column.justify-bottom{
+    align-items: end;
 }
