@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/resets.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <title>Register With Us</title>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="container grow justify-center">
+        <div class="row">
+            <div class="column align-center justify-center">
+                <div class="title">
+                    <h1>Register with us</h1>
+                </div>
+                <div class="form-container">
+                    <form method="POST" action="https://request-inspector.glitch.me/">
+                        <fieldset>
+                            <legend><h4>Email & Password</h4></legend>
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email">
+
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="password">
+                        </fieldset>
+                        <fieldset>
+                            <legend><h4>Bio</h4></legend>
+                            <textarea class="bio" name="bio" id="bio"></textarea>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend><h4>How did you hear about us</h4></legend>
+                            <div class="row">
+                                <div class="column justify-space-between shrink">
+                                    <div class="row align-center justify-space-between">
+                                        <label class="quiz_question" for="Billboard">Billboard</label>
+                                        <input class="quiz_answer" type="checkbox" name="howDidYouHear" id="billboard" value="billboard">
+                                    </div>
+                                    <div class="row align-center justify-space-between">
+                                        <label class="quiz_question" for="radioAdvertisement">Radio Advertisement</label>
+                                        <input class="quiz_answer" type="checkbox" name="howDidYouHear" id="radioAdvertisement" value="radio advertisement">
+                                    </div>
+                                    <div class="row align-center justify-space-between">
+                                        <label class="quiz_question" for="internetAdvertisement">Internet Advertisement</label>
+                                        <input class="quiz_answer" type="checkbox" name="howDidYouHear" id="internetAdvertisement" value="internet advertisement">
+                                    </div>
+                                    <div class="row align-center justify-space-between">
+                                        <label class="quiz_question" for="other">Other</label>
+                                        <input class="quiz_answer other" type="checkbox" name="howDidYouHear" id="other" value="other"><br>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend><h4>What Browser are you using</h4></legend>
+                            <label for="chrome">Chrome</label>
+                            <input type="radio" name="Browser_Quiz" id="chrome" value="Chrome"><br>
+                            <label for="firefox">Firefox</label>
+                            <input type="radio" name="Browser_Quiz" id="firefox" value="Firefox"><br>
+                            <label for="safari">Safari</label>
+                            <input type="radio" name="Browser_Quiz" id="safari" value="Safari"><br>
+                        </fieldset>
+                        <div class="row justify-center">
+                            <input type="submit" value="Submit Form">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
