@@ -29,6 +29,9 @@
 .container.justify-center {
     justify-content: center;
 }
+.container.justify-bottom{
+    justify-content: end;
+}
 
 
     /*
@@ -116,5 +119,5 @@ column.justify-top{
     align-items: start;
 }
 .column.justify-bottom{
-    align-items: end;
+    justify-content: end;
 }
