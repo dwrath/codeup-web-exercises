@@ -47,20 +47,19 @@
     let listItems = document.querySelectorAll('li');
 
     // TODO: Set text color on every other list item to grey
-    // TODO: Set text color of li with dbid = 1 to blue
-    for(let i = 0; i < listItems.length; i++){
-      if(i % 2 == 0){
+    for(let i = 0; i < listItems.length; i++) {
+      if (i % 2 == 1) {
         listItems[i].style.color = '#3a3a3a';
-      }else{
-
-        listItems[i].style.color = '#091d69'
       }
     }
+    // TODO: Set text color of li with dbid = 1 to blue
+
+    document.querySelector(`li[data-dbid='1']`).style.color = '#192e9a'
 
 
 
     // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-    let subParagraphs = document.querySelector('.sub-paragraph');
+    let subParagraphs = document.querySelector('.sub-paragraph:first-child');
 
     // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
     subParagraphs.innerHTML = 'Mission Accomplished!'
