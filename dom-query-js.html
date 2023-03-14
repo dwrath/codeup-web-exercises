@@ -27,7 +27,10 @@
   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
   culpa qui officia deserunt mollit anim id est laborum.
 </p>
-
+<button id="mainHeaderBtn" class="btn">Change Header</button>
+<button id="subHeaderBtn">Change Color</button>
+<button id="list">List Color</button>
+<button id="paragraphAndHeader">paragraph</button>
 <script>
   (function() {
     "use strict";
@@ -35,34 +38,54 @@
     let mainHeader = document.querySelector('#main-header');
 
     // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-    mainHeader.innerHTML = 'Javascript is Cool';
+    let mainHeaderBtn = document.querySelector('#mainHeaderBtn')
+    mainHeaderBtn.addEventListener('click', function (e){
+      mainHeader.innerHTML = 'Javascript is Cool'
+    })
+
+
+    // mainHeader.innerHTML = 'Javascript is Cool';
 
     // TODO: Uncomment the next line and get the sub header element by id
     let subHeader = document.querySelector('#sub-header');
 
     // TODO: Set the text color of subHeader to blue
-    subHeader.style.color = '#192e9a';
+    let subHeaderBtn = document.querySelector('#subHeaderBtn')
+    subHeaderBtn.addEventListener('click', function (e){
+      subHeader.style.color = '#192e9a';
+    })
+
 
     // TODO: Uncomment the next line and get all list items
     let listItems = document.querySelectorAll('li');
 
     // TODO: Set text color on every other list item to grey
-    for(let i = 0; i < listItems.length; i++) {
-      if (i % 2 == 1) {
-        listItems[i].style.color = '#3a3a3a';
+    let listBtn = document.querySelector('#list')
+
+    listBtn.addEventListener('click', e => {
+      for(let i = 0; i < listItems.length; i++) {
+        if (i % 2 == 1) {
+          listItems[i].style.color = '#3a3a3a';
+        }
       }
-    }
+    })
+
     // TODO: Set text color of li with dbid = 1 to blue
 
-    document.querySelector(`li[data-dbid='1']`).style.color = '#192e9a'
 
+  let headerAndParagraph = document.querySelector('#paragraphAndHeader')
+    let subParagraphs = document.querySelector('.sub-paragraph');
+    function changeHeaderAndParagraph(){
+      document.querySelector(`li[data-dbid='1']`).style.color = '#192e9a';
+      subParagraphs.innerHTML = 'Mission Accomplished!';
+    }
 
+    headerAndParagraph.addEventListener('click', changeHeaderAndParagraph)
 
     // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-    let subParagraphs = document.querySelector('.sub-paragraph:first-child');
+
 
     // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-    subParagraphs.innerHTML = 'Mission Accomplished!'
   })();
 </script>
 </body>
