@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Konami Code</h1>
+<p>Enter Konami code</p>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+        crossorigin="anonymous">
+</script>
+<script>
+    "use strict";
+    let konamiCode = [38,38,40,40,37,39,37,39,66,65,13];
+    let index = 0;
+    $(document).keyup(function (event) {
+        event.preventDefault();
+        if (event.keyCode === konamiCode[index]) {
+            if (event.keyCode !== konamiCode[index]) {
+                index = 0;
+                alert('Code entered incorrectly')
+            }
+            index++;
+        }
+        if (index === konamiCode.length) {
+            $('body').css('background-color', 'green');
+            alert("Konami Code entered!");
+            index = 0;
+        }
+        console.log(event.keyCode);
+
+    });
+
+</script>
+</body>
+</html>
