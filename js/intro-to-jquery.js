@@ -13,6 +13,19 @@ $(document).ready(function (){
     //
     // let h1 = $('h1').html()
     // alert(h1)
-    $('li, h1, p').css('background-color', 'yellow');
+    // $('li, h1, p').css('background-color', 'yellow');
+
+    $('h1').click( function (){
+        $(this).css('background-color', 'yellow')
+    })
+    $('p').dblclick( function (){
+        $(this).css('font-size', '18px')
+    })
+    $('h1').hover( function (){
+            $(this).css('color', 'red');
+        },
+        function() {
+            $(this).css('color', 'black');
+        })
 })
 
