@@ -2,13 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/resets.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/konami.css">
     <title>Title</title>
 </head>
 <body>
-<h1>Konami Code</h1>
-<p>Enter Konami code</p>
+<div class="page-wrapper">
+    <header class="container height justify-center">
+        <div class="row align-center">
+            <div class="column justify-center text-center">
+                <h1 class="header-title">Konami Code</h1>
+            </div>
+        </div>
+    </header>
+</div>
+<section class=" container hero-scene justify-center">
+    <div class="row">
+        <div class="column justify-center message">
+            <p class="correct floating">Konami Code Entered!</p>
+            <p class="incorrect floating">Incorrect Code Bison wins!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column justify-center hero-img-container">
+            <div class="idle">
+                <img class="hero-image-idle-1" src="images/ryu-idle.gif">
+            </div>
+            <div class="idle">
+                <img class="hero-image-idle-2" src="images/ken-idle.gif">
+            </div>
 
+            <div>
+                <img  class="hero-image-incorrect" src="images/m-bison.gif" alt="m-bison">
+                <img class="hero-image-correct" src="images/ryu-ken-gif.gif" alt="">
+                <audio id="play-correct">
+                    <source src="sounds/hadouken.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="play-incorrect">
+                    <source src="sounds/game-over-bison.mp3" type="audio/mpeg">
+                </audio>
 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
@@ -22,15 +61,36 @@
     $(document).keyup(function (event) {
         event.preventDefault();
         if (event.keyCode === konamiCode[index]) {
-            if (event.keyCode !== konamiCode[index]) {
-                index = 0;
-                alert('Code entered incorrectly')
-            }
             index++;
+            }else if (event.keyCode !== konamiCode[index]) {
+            index = 0;
+            $('.hero-image-incorrect').css('display', 'block');
+            $('.incorrect').css('display', 'block');
+            $('.hero-image-idle-1').css('display', 'none');
+            $('.hero-image-idle-2').css('display', 'none');
+            $('audio#play-incorrect')[0].play()
+            setTimeout(function() {
+                $('.hero-image-incorrect').css('display', 'none');
+                $('.incorrect').css('display', 'none');
+                $('.hero-image-idle-1').css('display', 'block');
+                $('.hero-image-idle-2').css('display', 'block');
+            }, 5000);
         }
         if (index === konamiCode.length) {
-            $('body').css('background-color', 'green');
-            alert("Konami Code entered!");
+            $('.hero-image-correct').css('display', 'block');
+            $('.hero-image-idle-1').css('display', 'none');
+            $('.hero-image-idle-2').css('display', 'none');
+
+            $('.correct').css('display', 'block');
+            $('audio#play-correct')[0].play()
+            setTimeout(function (){
+                $('.hero-image-correct').css('display', 'none');
+                $('.hero-image-idle-1').css('display', 'block');
+                $('.hero-image-idle-2').css('display', 'block');
+
+                $('.correct').css('display', 'none');
+            }, 5000)
+
             index = 0;
         }
         console.log(event.keyCode);

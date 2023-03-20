@@ -1,0 +1,81 @@
+body{
+    background-image: url("/images/Street-Fighter-Duel-1.jpg");
+    font-family: "Act-of-Rejection";
+}
+@font-face {
+    font-family: "Act-of-Rejection";
+    src: url("/fonts/Act_Of_Rejection.ttf");
+}
+.header-title{
+    color: white;
+    font-size: 70px;
+}
+.hero-img-container{
+    position: relative;
+}
+.hero-image-correct{
+    display: none;
+    position: absolute;
+    top: -423px;
+    left: 8px;
+}
+.hero-image-idle-1{
+    position: absolute;
+    top: -528px;
+    left: 106px;
+    width: 326px;
+    height: 425px;
+}
+.hero-image-idle-2{
+    position: absolute;
+    top: -528px;
+    left: 432px;
+    width: 575px;
+    height: 425px;
+}
+.container.height{
+    margin-top: 60px;
+}
+.hero-image-incorrect{
+    display: none;
+    position: absolute;
+    top: -528px;
+    left: 244px;
+    width: 575px;
+    height: 425px;
+}
+.correct{
+    display: none;
+    position: absolute;
+    top: -528px;
+    left: 363px;
+    font-size: 50px;
+    color: white;
+}
+.incorrect{
+    position: absolute;
+    display: none;
+    top: -610px;
+    left: 301px;
+    font-size: 50px;
+    color: red;
+
+}
+.message{
+    position: relative;
+
+}
+.floating {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: -55px;
+    margin-top: 5px;
+}
+
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }
+}
