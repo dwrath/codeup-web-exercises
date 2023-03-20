@@ -1,0 +1,21 @@
+.invisible{
+    display: none;
+}
+.active{
+    background-color: yellow;
+}
+.row.height{
+    min-height: 200px;
+}
+dd{
+    margin: 20px;
+}
+dl{
+    border-style: double;
+    border-width: 5px;
+    padding: 20px;
+}
+dt{
+    margin:30px;
+    font-weight: bold;
+}
