@@ -66,9 +66,7 @@
 .row.no-gap {
     gap: unset;
 }
-.row.full-width{
 
-}
 .row.justify-right{
     justify-content: end;
 }
