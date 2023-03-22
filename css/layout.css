@@ -119,3 +119,6 @@ column.justify-top{
 .column.justify-bottom{
     justify-content: end;
 }
+.gap-10 {
+    gap: 10px;
+}

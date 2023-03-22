@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/keys.js"></script>
+    <script src="js/mapbox.js"></script>
+    <script src="js/mapbox-geocoder-utils.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="css/resets.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/mapbox-maps-api.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="container justify-center">
+        <div class="row">
+            <div class="column align-center justify-center">
+                <h1>Mapbox</h1>
+                <div id='map' style='width: 1100px; height: 500px;'></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column justify-center">
+                <button class="zoom-lvl">Change zoom level</button>
+            </div>
+            <div class="column justify-center inline">
+                <label for="search">Enter Address: </label>
+                <input class="searchAddress" type="text" id="search">
+                <button>Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    mapboxgl.accessToken = MAPBOX_API_TOKEN;
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
+        center: [-98.48962, 29.42692], // starting position [lng, lat]
+        zoom: 9, // starting zoom
+    });
+    // document.querySelector('.searchAddress').addEventListener('')
+    let zoom = 5
+    document.querySelector('.zoom-lvl').addEventListener('click', function (){
+
+        if(zoom === 20){
+            zoom=5
+        }else{
+            zoom+=5
+        }
+        geocode("233 E Houston St Suite 100, San Antonio, TX 78205", MAPBOX_API_TOKEN).then(function(result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(zoom);
+        });
+    })
+    let marker = new mapboxgl.Marker()
+        .setLngLat([-98.489975, 29.42663])
+        .addTo(map);
+    let popup = new mapboxgl.Popup()
+        .setHTML("<p>The Palm</p>")
+
+    marker.setPopup(popup)
+
+    let resturantsArr = [
+        {name: 'What-a-burger',
+        bio:'Whataburger is an American regional fast food restaurant chain',
+        address:'412 E Commerce St, San Antonio, TX 78205'},
+        {name: 'Olive Garden',
+        bio:'Olive Garden is an American casual dining restaurant chain specializing in Italian-American cuisine.',
+        address:'1305 S Interstate 35, San Marcos, TX 78666'},
+        {name: 'Red Lobster',
+        bio:'Red Lobster Hospitality LLC is an American casual dining restaurant chain headquartered in Orlando, Florida.',
+        address:'17415 US-281 #281N, San Antonio, TX 78232'}
+    ]
+
+    resturantsArr.forEach((resturant)=>{
+        geocode(resturant.address, MAPBOX_API_TOKEN).then(function (res){
+            let marker = new mapboxgl.Marker()
+                .setLngLat(res)
+                .addTo(map);
+            let popup = new mapboxgl.Popup()
+                .setHTML(`<p>${resturant.bio}</p>`)
+            marker.setPopup(popup)
+        })
+    })
+
+</script>
+</body>
+</html>
