@@ -1,4 +1,5 @@
 import keys from './keys.js'
+import WeatherCard from "./components/WeatherCard.js";
 
 let saLon = -98.489975;
 let saLat = 29.42663;
@@ -13,7 +14,7 @@ const getCurrentWeather = async(lat, lon)=>{
 }
 const getFourDayForecast = async (lat,lon)=>{
     try{
-        let res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keys.weathermap}`)
+        let res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keys.weathermap}&units=imperial`)
         let data =await res.json()
         return data
     }catch (error){
@@ -56,10 +57,31 @@ const getCurrentWeatherInfo = async () =>{
                                 <h3>Sunset: ${new Date(sunset * 1000).toLocaleString()}</h3>`
     document.querySelector('#weather-bio').innerHTML = `<h1 class="summary-title">Forecast Summary</h1><p>Today's forecast is ${description}, With a tempature of ${Math.round(temp)}° but feels like ${Math.round(feelsLike)}°. The high for the day is ${Math.round(high)}° with a low of ${low}° and wind gusts up to ${gusts} mph. </p>`
 }
+
+async function getDays() {
+    let data = await getFourDayForecast(saLat,saLon)
+    let daysArray = []
+    let daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday','Saturday']
+    data.list.forEach((forecast, index) => {
+        if (index % 8 === 0 && index !== 0){
+            const time = new Date(forecast.dt * 1000);
+            let day = daysOfTheWeek[time.getDay()]
+            let temp = `${Math.round(forecast.main.temp)}°`
+            let desc = forecast.weather[0].description;
+            let img = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`
+
+            daysArray.push({dayOfWeek:day,tempature:temp, description:desc, img: img })
+
+        }
+    });
+    return daysArray
+}
+
 (async ()=>{
-    let weather = await getCurrentWeather(saLat,saLon)
-    let extForecast = await getFourDayForecast(saLat,saLon)
-    console.log(weather)
-    console.log(extForecast)
     let currentTemp = await getCurrentWeatherInfo()
+    let fourDay = await getDays()
+    fourDay.forEach(function(day){
+        let dayList = document.querySelector('#ext-forecast');
+        new WeatherCard(day, dayList);
+    });
 })()
