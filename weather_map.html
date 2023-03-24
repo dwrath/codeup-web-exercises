@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="js/mapbox-geocoder-utils.js"></script>
+    <script type="module" src="js/mapbox-geocoder-utils.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet'/>
     <script type="module" src="js/weather-map.js"></script>
@@ -32,7 +32,7 @@
                                 <path d="m759.3 620.68h132.57v27.691h-132.57z"/>
                             </g>
                         </svg>
-                        <input type="search" class="city-search" value="      San Antonio, Tx">
+                        <input type="search" class="city-search" id="fly" value="San Antonio, Tx">
                         <svg class="magnifying-glass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101 101" id="search">
                             <path d="M63.3 59.9c3.8-4.6 6.2-10.5 6.2-17 0-14.6-11.9-26.5-26.5-26.5S16.5 28.3 16.5 42.9 28.4 69.4 43 69.4c6.4 0 12.4-2.3 17-6.2l20.6 20.6c.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7.9-.9.9-2.5 0-3.4L63.3 59.9zm-20.4 4.7c-12 0-21.7-9.7-21.7-21.7s9.7-21.7 21.7-21.7 21.7 9.7 21.7 21.7-9.7 21.7-21.7 21.7z"></path>
                         </svg>
@@ -43,6 +43,7 @@
                     <!--                    current temp and wind speed-->
                     <div class="row current-weather-row align-center">
                         <div class="column" id="current-temp">
+
 
                         </div>
                         <div class="column" id="wind-speed">
@@ -69,19 +70,15 @@
                 <div class="container">
                     <header class="row header-height align-center">
                         <div class="column">
-                            <h1>National Forecast</h1>
+                            <h1>Extended Forecast</h1>
                         </div>
                     </header>
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="column justify-center">
-                            <h3>Weather Forecast</h3>
-
-                        </div>
                             <!--    Map-->
-                        <div class="column">
-                            <div id='map' style='width: 400px; height: 300px;'></div>
+                        <div class="column align-center">
+                            <div id='map' style='width: 600px; height: 300px;'></div>
                         </div>
                     </div>
                     <div class="row ext-forecast" id="ext-forecast">

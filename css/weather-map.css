@@ -45,7 +45,7 @@ svg.thermo{
     width: 20px;
     position: absolute;
     top: -748px;
-    left: 67px;
+    left:53px;
 }
 svg.sunrise{
     width: 44px;
@@ -72,10 +72,15 @@ svg.sunset{
 .inline{
     opacity: .7;
     white-space: nowrap;
+    font-size: 14px;
 }
 .temp{
     font-size: 70px;
     opacity: .7;
+}
+.curr-weather-title{
+    white-space: nowrap;
+    font-size: 20px;
 }
 .width{
     width: 340px;

@@ -1,5 +1,6 @@
 import keys from './keys.js'
 import WeatherCard from "./components/WeatherCard.js";
+import {geocode} from "./mapbox-geocoder-utils.js";
 
 let saLon = -98.489975;
 let saLat = 29.42663;
@@ -27,13 +28,13 @@ const getCurrentWeatherInfo = async () =>{
     let windSpeed = currWeather.wind.speed
     let sunrise = currWeather.sys.sunrise
     let sunset = currWeather.sys.sunset
-    let description = currWeather.weather.description
+    let description = currWeather.weather[0].description
     let feelsLike = currWeather.main.feels_like
     let high = currWeather.main.temp_max
     let low = currWeather.main.temp_min
     let gusts= currWeather.wind.gust
 
-    document.querySelector('#current-temp').innerHTML = `<h1 class="temp">${Math.round(temp)}°</h1>`
+    document.querySelector('#current-temp').innerHTML = `<h1 class="curr-weather-title justify-center">Todays Forecast</h1><h1 class="temp">${Math.round(temp)}°</h1>`
     document.querySelector('#wind-speed').innerHTML = `<p class="inline">Wind speed: ${windSpeed} mph</p>`
     document.querySelector('#weather-details').innerHTML = `
 <svg class="sunrise" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +57,27 @@ const getCurrentWeatherInfo = async () =>{
 
                                 <h3>Sunset: ${new Date(sunset * 1000).toLocaleString()}</h3>`
     document.querySelector('#weather-bio').innerHTML = `<h1 class="summary-title">Forecast Summary</h1><p>Today's forecast is ${description}, With a tempature of ${Math.round(temp)}° but feels like ${Math.round(feelsLike)}°. The high for the day is ${Math.round(high)}° with a low of ${low}° and wind gusts up to ${gusts} mph. </p>`
+    return currWeather
 }
+
+function debounce(func, delay) {
+    let timer;
+    return function(...args) {
+        const context = this;
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(context, args), delay);
+    };
+}
+document.querySelector('#fly').addEventListener('input', debounce(function (){
+    let address = document.querySelector('input').value
+     geocode(address, keys.mapbox).then(coords=>{
+         this.map.flyTo({
+             center: [coords],
+             essential: true // this animation is considered essential with respect to prefers-reduced-motion
+         });
+    });
+
+}))
 
 async function getDays() {
     let data = await getFourDayForecast(saLat,saLon)
