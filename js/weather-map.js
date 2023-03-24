@@ -97,7 +97,18 @@ async function getDays() {
     });
     return daysArray
 }
-
+const changeBackground = async () =>{
+    let weather = await getCurrentWeatherInfo()
+    weather = weather.weather[0].description
+    console.log(weather)
+    if(weather == 'clear sky' || weather == 'sunny'){
+        document.querySelector('.current-weather-background').style.backgroundImage= 'url(../images/sunny.gif)'
+    }else if(weather == 'partly cloudy'){
+        document.querySelector('.current-weather-background').style.backgroundImage= 'url(../images/cloudy.gif)'
+    }else if(weather == 'thunderstorm'){
+        document.querySelector('.current-weather-background').style.backgroundImage= 'url(../images/thunderstorm.gif)'
+    }
+}
 (async ()=>{
     let currentTemp = await getCurrentWeatherInfo()
     let fourDay = await getDays()
@@ -105,4 +116,5 @@ async function getDays() {
         let dayList = document.querySelector('#ext-forecast');
         new WeatherCard(day, dayList);
     });
+    await changeBackground()
 })()
