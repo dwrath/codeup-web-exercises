@@ -16,7 +16,7 @@ class WeatherCard{
               <div class="card-bottom">
                 <h2>${this.day}</h2>
                 <p>${this.temp}</p>
-                <p>${this.desc}</p>
+                <p>${this.desc.charAt(0).toUpperCase() + this.desc.slice(1)}</p>
               </div>
         `;
         weatherNode.innerHTML = html;

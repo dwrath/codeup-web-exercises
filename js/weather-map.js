@@ -2,29 +2,37 @@ import keys from './keys.js'
 import WeatherCard from "./components/WeatherCard.js";
 import {geocode} from "./mapbox-geocoder-utils.js";
 
-let saLon = -98.489975;
-let saLat = 29.42663;
-const getCurrentWeather = async(lat, lon)=>{
-    try{
+mapboxgl.accessToken = keys.mapbox;
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
+    center: [-98.48962, 29.42692], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+});
+
+let cityLon = -98.489975;
+let cityLat = 29.42663;
+const getCurrentWeather = async (lat=cityLat, lon=cityLon) => {
+    try {
         let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keys.weathermap}&units=imperial`)
         let data = await res.json()
         return data
-    } catch(error) {
+    } catch (error) {
         console.log(error)
     }
 }
-const getFourDayForecast = async (lat,lon)=>{
-    try{
+const getFourDayForecast = async (lat =cityLat, lon=cityLon) => {
+    try {
         let res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keys.weathermap}&units=imperial`)
-        let data =await res.json()
+        let data = await res.json()
         return data
-    }catch (error){
+    } catch (error) {
         console.log(error)
     }
 }
-const getCurrentWeatherInfo = async () =>{
-    let currWeather = await getCurrentWeather(saLat, saLon)
-     let temp = currWeather.main.temp
+const getCurrentWeatherInfo = async (lat = cityLat, lon= cityLon) => {
+    let currWeather = await getCurrentWeather(cityLat, cityLon)
+    let temp = currWeather.main.temp
     let windSpeed = currWeather.wind.speed
     let sunrise = currWeather.sys.sunrise
     let sunset = currWeather.sys.sunset
@@ -32,87 +40,111 @@ const getCurrentWeatherInfo = async () =>{
     let feelsLike = currWeather.main.feels_like
     let high = currWeather.main.temp_max
     let low = currWeather.main.temp_min
-    let gusts= currWeather.wind.gust
+    let gusts = currWeather.wind.gust
 
     document.querySelector('#current-temp').innerHTML = `<h1 class="curr-weather-title justify-center">Todays Forecast</h1><h1 class="temp">${Math.round(temp)}°</h1>`
     document.querySelector('#wind-speed').innerHTML = `<p class="inline">Wind speed: ${windSpeed} mph</p>`
     document.querySelector('#weather-details').innerHTML = `
-<svg class="sunrise" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
- <g>
-  <path d="m600 392.39c6.2148 0 12.176-2.4688 16.574-6.8633 4.3945-4.3945 6.8633-10.355 6.8633-16.574v-85.062c0-8.3711-4.4688-16.109-11.719-20.297s-16.188-4.1875-23.438 0-11.719 11.926-11.719 20.297v85.062c0 6.2188 2.4688 12.18 6.8633 16.574 4.3984 4.3945 10.359 6.8633 16.574 6.8633z"/>
-  <path d="m827.95 620.34c0 6.2148 2.4688 12.176 6.8633 16.57 4.3984 4.3945 10.359 6.8672 16.574 6.8672h85.062c8.375 0 16.113-4.4688 20.301-11.719 4.1836-7.2539 4.1836-16.188 0-23.438-4.1875-7.2539-11.926-11.719-20.301-11.719h-85.062c-6.2148 0-12.176 2.4688-16.574 6.8633-4.3945 4.3945-6.8633 10.355-6.8633 16.574z"/>
-  <path d="m263.55 643.78h85.062c8.375 0 16.109-4.4688 20.297-11.719 4.1875-7.2539 4.1875-16.188 0-23.438-4.1875-7.2539-11.922-11.719-20.297-11.719h-85.062c-8.375 0-16.113 4.4648-20.301 11.719-4.1836 7.25-4.1836 16.184 0 23.438 4.1875 7.25 11.926 11.719 20.301 11.719z"/>
-  <path d="m405.67 459.16c4.3906 4.4102 10.355 6.8945 16.582 6.9023 6.2266 0.007812 12.195-2.4648 16.598-6.8633 4.4023-4.4023 6.875-10.375 6.8672-16.602-0.007812-6.2227-2.4922-12.191-6.9023-16.582l-60.148-60.148c-4.3906-4.4219-10.359-6.9141-16.59-6.9258-6.2305-0.007812-12.207 2.4609-16.613 6.8672-4.4062 4.4023-6.875 10.383-6.8633 16.613 0.007813 6.2305 2.5 12.199 6.9219 16.59z"/>
-  <path d="m777.76 466.02c6.2148 0.007812 12.18-2.4609 16.57-6.8633l60.148-60.148c4.4219-4.3906 6.9141-10.359 6.9219-16.59 0.011718-6.2305-2.457-12.211-6.8633-16.613-4.4062-4.4062-10.383-6.875-16.613-6.8672-6.2305 0.011719-12.199 2.5039-16.59 6.9258l-60.148 60.148c-4.3945 4.3945-6.8633 10.355-6.8633 16.57 0 6.2188 2.4688 12.18 6.8633 16.574 4.3945 4.3945 10.355 6.8633 16.574 6.8633z"/>
-  <path d="m1012.6 697.6h-230.06c17.121-40.352 20.383-85.238 9.2812-127.64-11.105-42.402-35.949-79.934-70.648-106.71-34.699-26.781-77.301-41.312-121.13-41.312s-86.434 14.531-121.13 41.312c-34.699 26.781-59.543 64.312-70.648 106.71-11.102 42.406-7.8398 87.293 9.2812 127.64h-230.06c-8.3711 0-16.109 4.4688-20.297 11.719-4.1875 7.2539-4.1875 16.188 0 23.438 4.1875 7.2539 11.926 11.719 20.297 11.719h825.12c8.3711 0 16.109-4.4648 20.297-11.719 4.1875-7.25 4.1875-16.184 0-23.438-4.1875-7.25-11.926-11.719-20.297-11.719z"/>
-  <path d="m851.97 795.13h-503.95c-8.3711 0-16.109 4.4688-20.297 11.719-4.1875 7.2539-4.1875 16.188 0 23.438 4.1875 7.2539 11.926 11.719 20.297 11.719h503.95c8.3711 0 16.109-4.4648 20.297-11.719 4.1875-7.25 4.1875-16.184 0-23.438-4.1875-7.25-11.926-11.719-20.297-11.719z"/>
-  <path d="m676.65 892.67h-153.3c-8.3711 0-16.109 4.4648-20.297 11.719-4.1875 7.25-4.1875 16.184 0 23.438 4.1875 7.25 11.926 11.719 20.297 11.719h153.3c8.3711 0 16.109-4.4688 20.297-11.719 4.1875-7.2539 4.1875-16.188 0-23.438-4.1875-7.2539-11.926-11.719-20.297-11.719z"/>
- </g>
-</svg>
-<h3>Sunrise: ${new Date(sunrise * 1000).toLocaleString()}</h3>
-
-<svg class="sunset" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
- <path d="m0 775h1200v50h-1200zm100 100h1e3v50h-1e3zm100 100h800v50h-800zm400-550c-137.5 0-250 112.5-250 250h-50c0-165 135-300 300-300s300 135 300 300h-50c0-137.5-112.5-250-250-250z"/>
-</svg>
-
-                                <h3>Sunset: ${new Date(sunset * 1000).toLocaleString()}</h3>`
-    document.querySelector('#weather-bio').innerHTML = `<h1 class="summary-title">Forecast Summary</h1><p>Today's forecast is ${description}, With a tempature of ${Math.round(temp)}° but feels like ${Math.round(feelsLike)}°. The high for the day is ${Math.round(high)}° with a low of ${low}° and wind gusts up to ${gusts} mph. </p>`
+        <svg class="sunrise" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+         <g>
+          <path d="m600 392.39c6.2148 0 12.176-2.4688 16.574-6.8633 4.3945-4.3945 6.8633-10.355 6.8633-16.574v-85.062c0-8.3711-4.4688-16.109-11.719-20.297s-16.188-4.1875-23.438 0-11.719 11.926-11.719 20.297v85.062c0 6.2188 2.4688 12.18 6.8633 16.574 4.3984 4.3945 10.359 6.8633 16.574 6.8633z"/>
+          <path d="m827.95 620.34c0 6.2148 2.4688 12.176 6.8633 16.57 4.3984 4.3945 10.359 6.8672 16.574 6.8672h85.062c8.375 0 16.113-4.4688 20.301-11.719 4.1836-7.2539 4.1836-16.188 0-23.438-4.1875-7.2539-11.926-11.719-20.301-11.719h-85.062c-6.2148 0-12.176 2.4688-16.574 6.8633-4.3945 4.3945-6.8633 10.355-6.8633 16.574z"/>
+          <path d="m263.55 643.78h85.062c8.375 0 16.109-4.4688 20.297-11.719 4.1875-7.2539 4.1875-16.188 0-23.438-4.1875-7.2539-11.922-11.719-20.297-11.719h-85.062c-8.375 0-16.113 4.4648-20.301 11.719-4.1836 7.25-4.1836 16.184 0 23.438 4.1875 7.25 11.926 11.719 20.301 11.719z"/>
+          <path d="m405.67 459.16c4.3906 4.4102 10.355 6.8945 16.582 6.9023 6.2266 0.007812 12.195-2.4648 16.598-6.8633 4.4023-4.4023 6.875-10.375 6.8672-16.602-0.007812-6.2227-2.4922-12.191-6.9023-16.582l-60.148-60.148c-4.3906-4.4219-10.359-6.9141-16.59-6.9258-6.2305-0.007812-12.207 2.4609-16.613 6.8672-4.4062 4.4023-6.875 10.383-6.8633 16.613 0.007813 6.2305 2.5 12.199 6.9219 16.59z"/>
+          <path d="m777.76 466.02c6.2148 0.007812 12.18-2.4609 16.57-6.8633l60.148-60.148c4.4219-4.3906 6.9141-10.359 6.9219-16.59 0.011718-6.2305-2.457-12.211-6.8633-16.613-4.4062-4.4062-10.383-6.875-16.613-6.8672-6.2305 0.011719-12.199 2.5039-16.59 6.9258l-60.148 60.148c-4.3945 4.3945-6.8633 10.355-6.8633 16.57 0 6.2188 2.4688 12.18 6.8633 16.574 4.3945 4.3945 10.355 6.8633 16.574 6.8633z"/>
+          <path d="m1012.6 697.6h-230.06c17.121-40.352 20.383-85.238 9.2812-127.64-11.105-42.402-35.949-79.934-70.648-106.71-34.699-26.781-77.301-41.312-121.13-41.312s-86.434 14.531-121.13 41.312c-34.699 26.781-59.543 64.312-70.648 106.71-11.102 42.406-7.8398 87.293 9.2812 127.64h-230.06c-8.3711 0-16.109 4.4688-20.297 11.719-4.1875 7.2539-4.1875 16.188 0 23.438 4.1875 7.2539 11.926 11.719 20.297 11.719h825.12c8.3711 0 16.109-4.4648 20.297-11.719 4.1875-7.25 4.1875-16.184 0-23.438-4.1875-7.25-11.926-11.719-20.297-11.719z"/>
+          <path d="m851.97 795.13h-503.95c-8.3711 0-16.109 4.4688-20.297 11.719-4.1875 7.2539-4.1875 16.188 0 23.438 4.1875 7.2539 11.926 11.719 20.297 11.719h503.95c8.3711 0 16.109-4.4648 20.297-11.719 4.1875-7.25 4.1875-16.184 0-23.438-4.1875-7.25-11.926-11.719-20.297-11.719z"/>
+          <path d="m676.65 892.67h-153.3c-8.3711 0-16.109 4.4648-20.297 11.719-4.1875 7.25-4.1875 16.184 0 23.438 4.1875 7.25 11.926 11.719 20.297 11.719h153.3c8.3711 0 16.109-4.4688 20.297-11.719 4.1875-7.2539 4.1875-16.188 0-23.438-4.1875-7.2539-11.926-11.719-20.297-11.719z"/>
+         </g>
+        </svg>
+        <h3>Sunrise: ${new Date(sunrise * 1000).toLocaleString()}</h3>
+        <svg class="sunset" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+         <path d="m0 775h1200v50h-1200zm100 100h1e3v50h-1e3zm100 100h800v50h-800zm400-550c-137.5 0-250 112.5-250 250h-50c0-165 135-300 300-300s300 135 300 300h-50c0-137.5-112.5-250-250-250z"/>
+        </svg>
+        <h3>Sunset: ${new Date(sunset * 1000).toLocaleString()}</h3>
+    `;
+    document.querySelector('#weather-bio').innerHTML = `<h1 class="summary-title">Forecast Summary</h1><p>Today's forecast is ${description}, With a tempature of ${Math.round(temp)}° but feels like ${Math.round(feelsLike)}°. The high for the day is ${Math.round(high)}° with a low of ${Math.round(low)}° and wind gusts up to ${gusts} mph. </p>`
     return currWeather
 }
 
 function debounce(func, delay) {
     let timer;
-    return function(...args) {
+    return function (...args) {
         const context = this;
         clearTimeout(timer);
         timer = setTimeout(() => func.apply(context, args), delay);
     };
 }
-document.querySelector('#fly').addEventListener('input', debounce(function (){
-    let address = document.querySelector('input').value
-     geocode(address, keys.mapbox).then(coords=>{
-         this.map.flyTo({
-             center: [coords],
-             essential: true // this animation is considered essential with respect to prefers-reduced-motion
-         });
-    });
-
-}))
-
-async function getDays() {
-    let data = await getFourDayForecast(saLat,saLon)
+async function getDays(lat, lon) {
+    let data = await getFourDayForecast(lat, lon)
     let daysArray = []
-    let daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday','Saturday']
+    let daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     data.list.forEach((forecast, index) => {
-        if (index % 8 === 0 && index !== 0){
+        if (index % 8 === 0 && index !== 0) {
             const time = new Date(forecast.dt * 1000);
             let day = daysOfTheWeek[time.getDay()]
             let temp = `${Math.round(forecast.main.temp)}°`
             let desc = forecast.weather[0].description;
             let img = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`
 
-            daysArray.push({dayOfWeek:day,tempature:temp, description:desc, img: img })
+            daysArray.push({dayOfWeek: day, tempature: temp, description: desc, img: img})
 
         }
     });
     return daysArray
 }
-const changeBackground = async () =>{
+// Mapbox fly to Search
+document.querySelector('#fly').addEventListener('input', debounce(async function () {
+    let address = document.querySelector('input').value;
+    let lon, lat
+    geocode(address, keys.mapbox).then(coords => {
+
+        lon = coords[0], lat = coords[1];
+        cityLon = lon, cityLat = lat
+        const newMarker = new mapboxgl.Marker()
+            .setLngLat(coords)
+            .addTo(map);
+        map.flyTo({
+            center: {
+                lon: coords[0],
+                lat: coords[1]
+            },
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+
+
+    });
+    await getCurrentWeatherInfo(cityLon,cityLat)
+    let fourDay = await getDays(cityLat, cityLon)
+    let dayList = document.querySelector('#ext-forecast');
+    dayList.innerHTML = ''
+    fourDay.forEach(function (day) {
+        new WeatherCard(day, dayList);
+    });
+    changeBackground()
+}, 500))
+
+
+
+const changeBackground = async () => {
     let weather = await getCurrentWeatherInfo()
     weather = weather.weather[0].description
     console.log(weather)
-    if(weather == 'clear sky' || weather == 'sunny'){
-        document.querySelector('.current-weather-background').style.backgroundImage= 'url(../images/sunny.gif)'
-    }else if(weather == 'partly cloudy'){
-        document.querySelector('.current-weather-background').style.backgroundImage= 'url(../images/cloudy.gif)'
-    }else if(weather == 'thunderstorm'){
-        document.querySelector('.current-weather-background').style.backgroundImage= 'url(../images/thunderstorm.gif)'
+    if (weather == 'clear sky' || weather == 'sunny') {
+        document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/sunny.gif)'
+    } else if (weather == 'partly cloudy' || weather == 'few clouds' || weather == 'broken clouds' || weather == 'overcast clouds') {
+        document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/cloudy.gif)'
+    } else if (weather == 'thunderstorm') {
+        document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/thunderstorm.gif)'
+    }else if(weather=='light rain'||weather=='moderate rain'||weather=='mist'){
+        document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/lightrain.gif)'
     }
 }
-(async ()=>{
+(async () => {
     let currentTemp = await getCurrentWeatherInfo()
     let fourDay = await getDays()
-    fourDay.forEach(function(day){
+    console.log(fourDay)
+    fourDay.forEach(function (day) {
         let dayList = document.querySelector('#ext-forecast');
         new WeatherCard(day, dayList);
     });
