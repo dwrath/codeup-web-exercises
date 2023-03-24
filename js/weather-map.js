@@ -9,9 +9,12 @@ const map = new mapboxgl.Map({
     center: [-98.48962, 29.42692], // starting position [lng, lat]
     zoom: 9, // starting zoom
 });
+/***********DEFAULT VALUES*******************/
+ let cityLon = -98.489975;
+  let cityLat = 29.42663;
+ /**********END DEFAULT VALUES*************/
 
-let cityLon = -98.489975;
-let cityLat = 29.42663;
+ /**********************GET REQUESTS********************************/
 const getCurrentWeather = async (lat=cityLat, lon=cityLon) => {
     try {
         let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keys.weathermap}&units=imperial`)
@@ -30,6 +33,9 @@ const getFourDayForecast = async (lat =cityLat, lon=cityLon) => {
         console.log(error)
     }
 }
+/*********************************END GET REQUESTS********************************************************/
+
+/********************************DATA OUTPUT FUNCTIONS**************************************************/
 const getCurrentWeatherInfo = async (lat = cityLat, lon= cityLon) => {
     let currWeather = await getCurrentWeather(cityLat, cityLon)
     let temp = currWeather.main.temp
@@ -67,14 +73,7 @@ const getCurrentWeatherInfo = async (lat = cityLat, lon= cityLon) => {
     return currWeather
 }
 
-function debounce(func, delay) {
-    let timer;
-    return function (...args) {
-        const context = this;
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(context, args), delay);
-    };
-}
+
 async function getDays(lat, lon) {
     let data = await getFourDayForecast(lat, lon)
     let daysArray = []
@@ -92,6 +91,17 @@ async function getDays(lat, lon) {
         }
     });
     return daysArray
+}
+/*****************************END DATA OUTPUT FUNCTIONS********************************/
+
+/******************************SEARCH & MAP FLY TO FUNCTIONALITY******************************************/
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        const context = this;
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(context, args), delay);
+    };
 }
 // Mapbox fly to Search
 document.querySelector('#fly').addEventListener('input', debounce(async function () {
@@ -124,8 +134,9 @@ document.querySelector('#fly').addEventListener('input', debounce(async function
     changeBackground()
 }, 500))
 
+/*******************END SEARCH & MAP FLY TO FUNCTIONALITY****************************/
 
-
+/******************************BACKGROUND CHANGES*************************************/
 const changeBackground = async () => {
     let weather = await getCurrentWeatherInfo()
     weather = weather.weather[0].description
@@ -140,6 +151,9 @@ const changeBackground = async () => {
         document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/lightrain.gif)'
     }
 }
+/*********************************END BACKGROUND CHANGES********************************/
+
+/********************************INITIALIZATION ON PAGE LOAD***************************/
 (async () => {
     let currentTemp = await getCurrentWeatherInfo()
     let fourDay = await getDays()
@@ -150,3 +164,4 @@ const changeBackground = async () => {
     });
     await changeBackground()
 })()
+/**********************************END**********************************************/
