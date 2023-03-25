@@ -132,10 +132,13 @@ document.querySelector('#fly').addEventListener('input', debounce(async function
         new WeatherCard(day, dayList);
     });
     changeBackground()
-}, 500))
+}, 1000))
 
 /*******************END SEARCH & MAP FLY TO FUNCTIONALITY****************************/
 
+/*********************DROP PIN AND SHOW FORECAST************************************/
+documnet.querySelector('#map')
+/**********************END********************************************************/
 /******************************BACKGROUND CHANGES*************************************/
 const changeBackground = async () => {
     let weather = await getCurrentWeatherInfo()
@@ -143,12 +146,16 @@ const changeBackground = async () => {
     console.log(weather)
     if (weather == 'clear sky' || weather == 'sunny') {
         document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/sunny.gif)'
+        document.querySelector('body').style.background = 'linear-gradient(#faf8f8 20%, #ab5b00 90%)';
     } else if (weather == 'partly cloudy' || weather == 'few clouds' || weather == 'broken clouds' || weather == 'overcast clouds') {
         document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/cloudy.gif)'
+        document.querySelector('body').style.background = 'linear-gradient(#faf8f8 20%, #006bab 90%)';
     } else if (weather == 'thunderstorm') {
         document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/thunderstorm.gif)'
+        document.querySelector('body').style.background = 'linear-gradient(#faf8f8 30%, #949494 90%)';
     }else if(weather=='light rain'||weather=='moderate rain'||weather=='mist'){
         document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/lightrain.gif)'
+        document.querySelector('body').style.background = 'linear-gradient(#faf8f8 30%, #0c6900 90%)';
     }
 }
 /*********************************END BACKGROUND CHANGES********************************/
