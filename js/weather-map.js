@@ -1,6 +1,6 @@
 import keys from './keys.js'
 import WeatherCard from "./components/WeatherCard.js";
-import {geocode} from "./mapbox-geocoder-utils.js";
+import {geocode, reverseGeocode} from "./mapbox-geocoder-utils.js";
 
 mapboxgl.accessToken = keys.mapbox;
 const map = new mapboxgl.Map({
@@ -19,6 +19,7 @@ const getCurrentWeather = async (lat=cityLat, lon=cityLon) => {
     try {
         let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keys.weathermap}&units=imperial`)
         let data = await res.json()
+        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -28,6 +29,7 @@ const getFourDayForecast = async (lat =cityLat, lon=cityLon) => {
     try {
         let res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keys.weathermap}&units=imperial`)
         let data = await res.json()
+        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -36,6 +38,12 @@ const getFourDayForecast = async (lat =cityLat, lon=cityLon) => {
 /*********************************END GET REQUESTS********************************************************/
 
 /********************************DATA OUTPUT FUNCTIONS**************************************************/
+function getDirection(degrees) {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(degrees / (360 / directions.length)) % directions.length;
+
+    return directions[index];
+}
 const getCurrentWeatherInfo = async (lat = cityLat, lon= cityLon) => {
     let currWeather = await getCurrentWeather(cityLat, cityLon)
     let temp = currWeather.main.temp
@@ -46,10 +54,13 @@ const getCurrentWeatherInfo = async (lat = cityLat, lon= cityLon) => {
     let feelsLike = currWeather.main.feels_like
     let high = currWeather.main.temp_max
     let low = currWeather.main.temp_min
-    let gusts = currWeather.wind.gust
+    let windDirection = getDirection(currWeather.wind.deg)
+    let daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const time = new Date(currWeather.dt * 1000);
+    let day = daysOfTheWeek[time.getDay()]
 
     document.querySelector('#current-temp').innerHTML = `<h1 class="curr-weather-title justify-center">Todays Forecast</h1><h1 class="temp">${Math.round(temp)}°</h1>`
-    document.querySelector('#wind-speed').innerHTML = `<p class="inline">Wind speed: ${windSpeed} mph</p>`
+    document.querySelector('#wind-speed').innerHTML = `<p class="inline">Wind speed: ${windDirection} ${windSpeed} mph</p>`
     document.querySelector('#weather-details').innerHTML = `
         <svg class="sunrise" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
          <g>
@@ -69,7 +80,7 @@ const getCurrentWeatherInfo = async (lat = cityLat, lon= cityLon) => {
         </svg>
         <h3>Sunset: ${new Date(sunset * 1000).toLocaleString()}</h3>
     `;
-    document.querySelector('#weather-bio').innerHTML = `<h1 class="summary-title">Forecast Summary</h1><p>Today's forecast is ${description}, With a tempature of ${Math.round(temp)}° but feels like ${Math.round(feelsLike)}°. The high for the day is ${Math.round(high)}° with a low of ${Math.round(low)}° and wind gusts up to ${gusts} mph. </p>`
+    document.querySelector('#weather-bio').innerHTML = `<h1 class="summary-title">Forecast Summary</h1><p>Today's forecast is ${description}, With a tempature of ${Math.round(temp)}° and feels like ${Math.round(feelsLike)}°. The high for the day is ${Math.round(high)}° with a low of ${Math.round(low)}° and winds blowing ${windDirection} around ${windSpeed} mph.</p>`
     return currWeather
 }
 
@@ -82,11 +93,12 @@ async function getDays(lat, lon) {
         if (index % 8 === 0 && index !== 0) {
             const time = new Date(forecast.dt * 1000);
             let day = daysOfTheWeek[time.getDay()]
-            let temp = `${Math.round(forecast.main.temp)}°`
+            let high = `${Math.round(forecast.main.temp_max)}°`
+            let low = `${Math.round(forecast.main.temp_min)}°`
             let desc = forecast.weather[0].description;
             let img = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`
 
-            daysArray.push({dayOfWeek: day, tempature: temp, description: desc, img: img})
+            daysArray.push({dayOfWeek: day, high: high, low: low, description: desc, img: img})
 
         }
     });
@@ -111,7 +123,7 @@ document.querySelector('#fly').addEventListener('input', debounce(async function
 
         lon = coords[0], lat = coords[1];
         cityLon = lon, cityLat = lat
-        const newMarker = new mapboxgl.Marker()
+        marker = new mapboxgl.Marker()
             .setLngLat(coords)
             .addTo(map);
         map.flyTo({
@@ -124,20 +136,48 @@ document.querySelector('#fly').addEventListener('input', debounce(async function
 
 
     });
-    await getCurrentWeatherInfo(cityLon,cityLat)
+    await getCurrentWeatherInfo(cityLat,cityLon)
     let fourDay = await getDays(cityLat, cityLon)
     let dayList = document.querySelector('#ext-forecast');
     dayList.innerHTML = ''
     fourDay.forEach(function (day) {
         new WeatherCard(day, dayList);
     });
-    changeBackground()
+    await changeBackground()
 }, 1000))
 
 /*******************END SEARCH & MAP FLY TO FUNCTIONALITY****************************/
 
 /*********************DROP PIN AND SHOW FORECAST************************************/
-documnet.querySelector('#map')
+let marker;
+map.on('click', async function(e) {
+    let lngLat = e.lngLat;
+    cityLon = lngLat.lng, cityLat = lngLat.lat
+    reverseGeocode(lngLat, keys.mapbox).then(city=>{
+        if (marker) {
+            marker.remove();
+        }
+        marker = new mapboxgl.Marker()
+            .setLngLat(lngLat)
+            .addTo(map);
+        map.flyTo({
+            center: {
+                lon: lngLat.lng,
+                lat: lngLat.lat
+            },
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+        document.querySelector('input').value = city
+    })
+    await getCurrentWeatherInfo(cityLat, cityLon)
+    let fourDay = await getDays(cityLat, cityLon)
+    let dayList = document.querySelector('#ext-forecast');
+    dayList.innerHTML = ''
+    fourDay.forEach(function (day) {
+        new WeatherCard(day, dayList);
+    });
+    await changeBackground()
+});
 /**********************END********************************************************/
 /******************************BACKGROUND CHANGES*************************************/
 const changeBackground = async () => {
@@ -156,6 +196,9 @@ const changeBackground = async () => {
     }else if(weather=='light rain'||weather=='moderate rain'||weather=='mist'){
         document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/lightrain.gif)'
         document.querySelector('body').style.background = 'linear-gradient(#faf8f8 30%, #0c6900 90%)';
+    }else if(weather == 'light snow'){
+        document.querySelector('.current-weather-background').style.backgroundImage = 'url(../images/snow.gif)'
+        document.querySelector('body').style.background = 'linear-gradient(#faf8f8 30%, #02304d 90%)';
     }
 }
 /*********************************END BACKGROUND CHANGES********************************/
