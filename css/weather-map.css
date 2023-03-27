@@ -9,7 +9,7 @@ body{
 .weather-logo{
     width: 20px;
 }
-h1,h2,h3,h4,h5,h6,p,a {
+h1,h2,h3,h4,h5,h6,p,a,svg {
     background: linear-gradient(to right, #f6f4f4, #c0c0c0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -28,6 +28,7 @@ background-image: url("../images/cloudy.gif");
     border: none transparent;
     border-bottom: 1px solid white;
     background-color: rgba(255,0,0,0);
+    color: white;
 }
 .row.current-weather-row{
     gap: 0px;
@@ -112,7 +113,7 @@ svg.sunset{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 .weather-card:hover {
     transform: scale(1.1);
