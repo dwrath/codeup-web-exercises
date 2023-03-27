@@ -2,6 +2,8 @@ import keys from './keys.js'
 import WeatherCard from "./components/WeatherCard.js";
 import {geocode, reverseGeocode} from "./mapbox-geocoder-utils.js";
 
+let marker;
+
 mapboxgl.accessToken = keys.mapbox;
 const map = new mapboxgl.Map({
     container: 'map', // container ID
@@ -120,7 +122,9 @@ document.querySelector('#fly').addEventListener('input', debounce(async function
     let address = document.querySelector('input').value;
     let lon, lat
     geocode(address, keys.mapbox).then(coords => {
-
+        if (marker) {
+            marker.remove();
+        }
         lon = coords[0], lat = coords[1];
         cityLon = lon, cityLat = lat
         marker = new mapboxgl.Marker()
@@ -149,7 +153,7 @@ document.querySelector('#fly').addEventListener('input', debounce(async function
 /*******************END SEARCH & MAP FLY TO FUNCTIONALITY****************************/
 
 /*********************DROP PIN AND SHOW FORECAST************************************/
-let marker;
+
 map.on('click', async function(e) {
     let lngLat = e.lngLat;
     cityLon = lngLat.lng, cityLat = lngLat.lat
