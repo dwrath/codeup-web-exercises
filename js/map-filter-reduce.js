@@ -66,7 +66,7 @@ console.log('List of user names:', listOfUserNames)
 
 // TODO: Use .reduce to get the unique list of languages from the list of users.
 console.log('List of languages:', users.reduce((acc, user)=>
-    acc.concat(user.languages)
+     acc.concat(user.languages)
 , []).filter((language, index, array) =>
     array.indexOf(language) === index
 ))

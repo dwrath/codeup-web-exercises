@@ -215,3 +215,38 @@ const minMax = (arr) => {
     return [max, min]
 }
 console.log(minMax([1, 2, 3, 4, 5]))
+
+/********************/
+const cars = [
+    {
+        make: "Honda",
+        model: "Civic",
+        mileage: 10428
+    },
+    {
+        make: "Toyota",
+        model: "Corolla",
+        mileage: 9425
+    },
+    {
+        make: "Ford",
+        model: "Mustang",
+        mileage: 2567
+    },
+    {
+        make: "Audi",
+        model: "A3",
+        mileage: 14500
+    },
+    {
+        make: "Mazda",
+        model: "3",
+        mileage: 11248
+    }
+];
+
+
+
+
+
+const totalMileage = cars.reduce((acc, cars)=> acc + cars.mileage, 0)
