@@ -1,6 +1,7 @@
+import keys from "./keys.js";
 export const getUserLastCommit = async (username)=>{
     try{
-        let response = await fetch(`https://api.github.com/users/${username}/events/public`, {headers: {'Authorization': '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'}})
+        let response = await fetch(`https://api.github.com/users/${username}/events/public`, {headers: {'Authorization': `${keys.github_token}`}})
         let data = await response.json()
         let date = data[0].created_at
         return date
