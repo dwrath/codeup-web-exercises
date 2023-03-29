@@ -250,3 +250,44 @@ const cars = [
 
 
 const totalMileage = cars.reduce((acc, cars)=> acc + cars.mileage, 0)
+/***********************************/
+const array = [
+    {
+        username: "john",
+        team: "red",
+        score: 5,
+        items: ["ball", "book", "pen"]
+    },
+    {
+        username: "becky",
+        team: "blue",
+        score: 10,
+        items: ["tape", "backpack", "pen"]
+    },
+    {
+        username: "susy",
+        team: "red",
+        score: 55,
+        items: ["ball", "eraser", "pen"]
+    },
+    {
+        username: "tyson",
+        team: "green",
+        score: 1,
+        items: ["book", "pen"]
+    },
+
+];
+
+//Create an array using map that has all the usernames with a "? to each of the usernames
+let arr = array.map(user=> ({...user, username:`${user.username}?`}))
+console.log(arr)
+//Filter the array to only include users who are on team: red
+let fil = array.filter(user => {
+    return user.team == 'red'
+})
+console.log(fil)
+//Find out the total score of all users using reduce
+let totalScore = array.reduce((acc, user)=> acc + user.score)
+console.log(totalScore)
+//BONUS: create a new list with all user information, but add "!" to the end of each items they own.
