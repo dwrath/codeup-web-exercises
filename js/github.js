@@ -10,24 +10,25 @@ export const getUserLastCommit = async (username)=>{
         console.log(error)
     }
 }
-export const getCommitDate = async (owner, repo)=>{
-    try{
-        let response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits`,
-            {headers: {'Authorization': `${keys.github_token}`}})
-        let data = await response.json
-        return data
-    }catch(error){
-        console.log(error)
+export const getCommitDate = async (owner, repo) => {
+    try {
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits`, {
+            headers: { 'Authorization': `${keys.github_token}` }
+        });
+            const data = await response.json();
+            return data[0];
+    } catch (error) {
+        console.error(error);
     }
+};
 
-}
 export const wait = (num)=>{
     return new Promise((resolve, reject) => {
             setTimeout(resolve, num);
     });
 }
 
-export const renderGithubUser = (user, parent) => {
+export const renderGithubUser = (user, commit, parent) => {
     const element = document.createElement('div');
     element.classList.add('user-card');
     element.innerHTML = `
@@ -35,6 +36,7 @@ export const renderGithubUser = (user, parent) => {
             <img src="${user.actor.avatar_url}" alt="User image" class="avatar">
         </div>
         <h2>${user.actor.display_login}</h2>
+        <p>Last commit: ${commit.commit.author.date}</p>
         <a href="${user.actor.url}" target="_blank">Go to Profile</a>
         <button>Remove</button>
     `;

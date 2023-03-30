@@ -3,8 +3,9 @@ import{getUserLastCommit, wait, renderGithubUser, getCommitDate} from "./github.
 (async ()=>{
     const user = await getUserLastCommit('dwrath')
     const usersGrid = document.querySelector('#userGrid');
-    renderGithubUser(user, usersGrid)
     const commit = await getCommitDate('dwrath', 'codeup-web-exercises')
+    renderGithubUser(user,commit, usersGrid)
+    // console.log(commit)
     // users.forEach(function(user){
     //     renderGithubUser(user, usersGrid);
     // });
