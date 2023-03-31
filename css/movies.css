@@ -19,6 +19,7 @@ body{
     background-color: #1e2033;
     border: 4px solid white;
     border-radius: 15px;
+    margin-bottom: 120px;
 }
 .hero-scene {
     width: 800px;
@@ -84,4 +85,61 @@ body{
     position: absolute;
     border: 4px solid white
 
+}
+.genre-row{
+    height: 100px;
+}
+.movie-genre{
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 180px;
+    min-width:180px;
+    max-height: 100px;
+    border: 3px solid grey;
+    border-radius: 15px;
+    background-color: #2D2E3A;
+}
+.action:hover{
+    background-image: url("../images/blackpanther-moviesapp.gif");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    cursor: pointer;
+}
+.comedy:hover{
+    background-image: url("../images/a-bugs-life.gif");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    cursor: pointer;
+}
+.thriller:hover{
+    background-image: url("../images/kingsman.gif");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    cursor: pointer;
+}
+.drama:hover{
+    background-image: url("../images/hidden-figures.gif");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    cursor: pointer;
+}
+.sci-fi:hover{
+    background-image: url("../images/interstellar.gif");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    cursor: pointer;
+}
+.catalog-title{
+    border-bottom: 1px solid white;
+}
+.catalog-row-height{
+    height: 65px;
+    margin: 130px;
 }
