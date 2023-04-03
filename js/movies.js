@@ -1,4 +1,4 @@
-import Movie from './components/Movie.js'
+import { displayMovies } from './movie-api.js'
 
 const carousel = document.querySelector('.carousel');
 const rightButton = document.querySelector('#left');
@@ -28,26 +28,12 @@ document.querySelector('.cancel').addEventListener('click', function(event) {
     document.querySelector('.overlay').classList.toggle('show');
 });
 
-    async function getMovies(){
-    try{
-        let response = await fetch( `https://codeup-json-server.glitch.me/movies`)
-        let data = await response.json()
-        return data
-    }catch (e) {
-        console.log(e)
-    }
 
-}
 
 (async ()=>{
-    let movieArray = await getMovies();
-    console.log(movieArray)
+    await displayMovies()
     document.querySelector('.content').style = 'display: flex'
     document.querySelector('#loading-icon').style = 'display:none'
-    movieArray.forEach(function(movie){
-        let movieList = document.querySelector('.content');
-        new Movie(movie, movieList);
-    });
 })()
 
 

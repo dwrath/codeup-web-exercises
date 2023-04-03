@@ -1,5 +1,5 @@
 {
-  "posts": [
+  "movies": [
     {
       "id": 1,
       "title": "json-server",
