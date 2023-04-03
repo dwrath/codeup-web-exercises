@@ -49,39 +49,42 @@
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/creed3.jpg">
                         </div>
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/avatar2.jpg">
                         </div>
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/interstellar.jpeg">
                         </div>
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/lion-king.webp">
                         </div>
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/ironman-3.jpeg">
                         </div>
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/wanda-vision.jpg">
                         </div>
                     </div>
                     <div class="carousel-cell">
                         <div class="img-wrapper">
-                            <img src="images/black-panther.webp">
+                            <img src="images/endgame.webp">
                         </div>
                     </div>
+                </div>
+                <div class="circle-container">
+                    <div class="flat-circle"></div>
                 </div>
                 <svg class="right-arrow" id="right" width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200"
                      xmlns="http://www.w3.org/2000/svg">
@@ -101,13 +104,59 @@
     </section>
     <section class="container">
             <div class="row justify-space-between align-center catalog-row-height catalog-title">
-                <div class="column shrink">Catalog</div>
+                <div class="column shrink catalog-font-size">Catalog</div>
                 <div class="column shrink">
                     <nav class="row">
-                        <div class="column shrink"><a href="#" title="Go Home">+ Add movie</a></div>
+                        <div id="add-movie" class="column shrink"><a href="#" title="Go Home">+ Add movie</a></div>
                     </nav>
                 </div>
             </div>
+        <div class="overlay">
+            <div class="form-container">
+                <div class="row">
+                    <div class="column">
+                        <form class="justify-center">
+                            <!-- form fields go here -->
+                            <h1 class="form-title">Add A Movie</h1>
+                           <div class="row">
+                               <div class="column">
+                                   <label for="title">Movie Title:</label>
+                               </div>
+                               <div class="column">
+                                   <input id="title" type="text">
+                               </div>
+                           </div>
+                            <div class="row">
+                                <div class="column">
+                                    <label for="director">Director:</label>
+                                </div>
+                                <div class="column">
+                                    <input id="director" type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <label for="director">Genre:</label>
+                                </div>
+                                <div class="column">
+                                    <input id="genre" type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <label for="director">Ratings:</label>
+                                </div>
+                                <div class="column">
+                                    <input id="ratings" type="text">
+                                </div>
+                            </div>
+                            <button type="submit">Submit</button>
+                            <button class="cancel" type="button">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div id="loading-icon">
             <img src="./images/loading-gif.gif" alt="Loading...">
