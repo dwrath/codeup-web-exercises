@@ -335,3 +335,25 @@ console.log(max_area_islands_DFS([
     [0, 1, 1, 0, 0],
     [0, 0, 1, 0, 0]
 ]));
+
+//Given an array of numbers sorted in ascending order and a target sum, find a pair in the array whose sum is equal to the given target.
+//
+// Write a function to return the indices of the two numbers (i.e. the pair) such that they add up to the given target. Input: [1, 2, 3, 4, 6], target=6
+// Output: [1, 3]
+// Explanation: The numbers at index 1 and 3 add up to 6: 2+4=6
+
+function pair_with_target_sum(arr, target_sum) {
+    let storage = {};
+
+    for(let i = 0; i < arr.length; i++){
+       let match = target_sum - arr[i];
+
+       if(match in storage){
+           return [i, storage[match]];
+       }
+       storage[arr[i]] = i;
+    }
+    return [-1,-1];
+}
+console.log(pair_with_target_sum([1, 2, 3, 4, 6], 6));
+console.log(pair_with_target_sum([2, 5, 9, 11], 11));
