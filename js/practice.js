@@ -399,3 +399,42 @@ console.log(flood_fill_DFS([
     [0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0]
 ], 3, 2, 5));
+
+
+class Solution {
+    // Function to check if given sentence is pangram
+    checkIfPangram(sentence) {
+        // TODO: Write your code here
+        let set = new Set()
+
+        for(let char of sentence.toLowerCase()){
+            if(char.match(/[a-z]/i)){
+                set.add(char)
+            }
+        }
+        return set.size == 26;
+    }
+}
+
+// Test cases
+const sol = new Solution();
+
+// Test case 1: "TheQuickBrownFoxJumpsOverTheLazyDog"
+// Expected output: true
+console.log(sol.checkIfPangram("TheQuickBrownFoxJumpsOverTheLazyDog"));
+
+// Test case 2: "This is not a pangram"
+// Expected output: false
+console.log(sol.checkIfPangram("This is not a pangram"));
+
+// Test case 3: "abcdef ghijkl mnopqr stuvwxyz"
+// Expected output: true
+console.log(sol.checkIfPangram("abcdef ghijkl mnopqr stuvwxyz"));
+
+// Test case 4: ""
+// Expected output: false
+console.log(sol.checkIfPangram(""));
+
+// Test case 5: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+// Expected output: true
+console.log(sol.checkIfPangram("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"));
